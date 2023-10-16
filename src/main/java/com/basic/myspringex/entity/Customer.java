@@ -3,6 +3,7 @@ package com.basic.myspringex.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
 @Table
 @Getter
 @Setter
+@DynamicUpdate
 public class Customer {
     @Id // @Entity 어노테이션에서 id값을 주지 않으면 오류
     @GeneratedValue(strategy = GenerationType.IDENTITY)
