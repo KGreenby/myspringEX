@@ -49,7 +49,12 @@ public class CustomerService {
         Customer existCustomer = customerRepository.findByEmail(email)
                 .orElseThrow(() ->
                         new BusinessException(email + " User Not Found", HttpStatus.NOT_FOUND));
-        existCustomer.setAge(customerReqDTO.getAge());
+        if (customerReqDTO.getAge() != null) {
+            existCustomer.setAge(customerReqDTO.getAge());
+        }
+        if (customerReqDTO.getName() != null) {
+            existCustomer.setName(customerReqDTO.getName());
+        }
         return modelMapper.map(existCustomer, CustomerResDTO.class);
     }
 

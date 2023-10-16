@@ -24,7 +24,7 @@ public class Customer {
     private String email;
 
     @Column(nullable = false)
-    private int age;
+    private Long age;
 
     @Column(nullable = false)
     private LocalDateTime entryDate = LocalDateTime.now();

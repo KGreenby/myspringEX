@@ -12,5 +12,5 @@ import lombok.Setter;
 public class CustomerReqDTO {
     private String name;
     private String email;
-    private int age;
+    private Long age;
 }
