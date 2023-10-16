@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class Customer {
-    @Id
+    @Id // @Entity 어노테이션에서 id값을 주지 않으면 오류
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
