@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<body>
+<form action="#" th:action="@{/customers/updateCustomer/{id}(id=${customer.id})}" th:object="${customer}" method="post">
+    <!-- th:object="${userReqDTO}" object이기 때문에 클레스 네임을 준다 -->
+    <label for="name">Name</label>
+    <input type="text" th:field="*{name}" id="name">
+    <!-- th:field로 인해 id, name, value 속성을 자동으로 가지게 된다 -->
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    <br/>
+    <label for="email">Email</label>
+    <input type="text" th:field="*{email}" id="email" readonly>
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+    <br/>
+    <label for="age">Age</label>
+    <input type="text" th:field="*{age}" id="age">
+    <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"></span>
+    <br/>
+    <input type="submit" value="Update Customer">
+</form>
+</body>
+</html>

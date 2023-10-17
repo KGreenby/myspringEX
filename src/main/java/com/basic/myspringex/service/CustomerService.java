@@ -1,6 +1,7 @@
 package com.basic.myspringex.service;
 
 import com.basic.myspringex.dto.CustomerReqDTO;
+import com.basic.myspringex.dto.CustomerReqFormDTO;
 import com.basic.myspringex.dto.CustomerResDTO;
 import com.basic.myspringex.entity.Customer;
 import com.basic.myspringex.exception.BusinessException;
@@ -31,7 +32,7 @@ public class CustomerService {
     @Transactional(readOnly = true)
     public CustomerResDTO getCustomerById(Long id) {
         Customer CustomerEntity = customerRepository.findById(id)
-                .orElseThrow(() -> new BusinessException(id + " user not found", HttpStatus.NOT_FOUND));
+                .orElseThrow(() -> new BusinessException(id + " customer not found", HttpStatus.NOT_FOUND));
         CustomerResDTO customerResDTO = modelMapper.map(CustomerEntity, CustomerResDTO.class);
         return customerResDTO;
     }
@@ -48,7 +49,7 @@ public class CustomerService {
     public CustomerResDTO updateCustomer(String email, CustomerReqDTO customerReqDTO) {
         Customer existCustomer = customerRepository.findByEmail(email)
                 .orElseThrow(() ->
-                        new BusinessException(email + " User Not Found", HttpStatus.NOT_FOUND));
+                        new BusinessException(email + " customer Not Found", HttpStatus.NOT_FOUND));
         if (customerReqDTO.getAge() != null) {
             existCustomer.setAge(customerReqDTO.getAge());
         }
@@ -56,6 +57,19 @@ public class CustomerService {
             existCustomer.setName(customerReqDTO.getName());
         }
         return modelMapper.map(existCustomer, CustomerResDTO.class);
+    }
+
+    public void updateCustomerForm(CustomerReqFormDTO customerReqFormDTO) {
+        Customer updateCustomer = customerRepository.findById(customerReqFormDTO.getId())
+                .orElseThrow(() ->
+                        new BusinessException(customerReqFormDTO.getId() + " customer Not Found", HttpStatus.NOT_FOUND));
+//        updateCustomer.setName(customerReqFormDTO.getName());
+        if (customerReqFormDTO.getName() != null) {
+            updateCustomer.setName(customerReqFormDTO.getName());
+        }
+        if (customerReqFormDTO.getAge() != null) {
+            updateCustomer.setAge(customerReqFormDTO.getAge());
+        }
     }
 
     public void deleteCustomer(Long id) {

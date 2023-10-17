@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>아이디 번호</th>
+            <th>이름</th>
+            <th>이메일</th>
+            <th>나이</th>
+            <th>등록일자</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        <tr th:each="customer, customerState : ${customers}">
+            <td th:text="${customerState.count}"></td>
+            <td th:text="${customer.name}"></td>
+            <td th:text="${customer.email}"></td>
+            <td th:text="${customer.age}"></td>
+            <td th:text="${#temporals.format(customer.entryDate,'yyyy-MM-dd | hh:mm')}"></td>
+            <td><a th:href="@{/customers/updateCustomer/{id}(id=${customer.id})}">update</a></td>
+            <td><a th:href="@{/customers/deleteCustomer/{id}(id=${customer.id})}">delete</a></td>
+        </tr>
+    </table>
+    <button><a href="/customers/addCustomer">Insert</a></button>
+</body>
+</html>
